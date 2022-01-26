@@ -1,0 +1,105 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{fullpage}
+\usepackage[shortlabels]{enumitem}
+
+
+\makeatletter
+\def\moverlay{\mathpalette\mov@rlay}
+\def\mov@rlay#1#2{\leavevmode\vtop{%
+   \baselineskip\z@skip \lineskiplimit-\maxdimen
+   \ialign{\hfil$\m@th#1##$\hfil\cr#2\crcr}}}
+\newcommand{\charfusion}[3][\mathord]{
+    #1{\ifx#1\mathop\vphantom{#2}\fi
+        \mathpalette\mov@rlay{#2\cr#3}
+      }
+    \ifx#1\mathop\expandafter\displaylimits\fi}
+\makeatother
+
+\newcommand{\cupdot}{\charfusion[\mathbin]{\cup}{\cdot}}
+\newcommand{\bigcupdot}{\charfusion[\mathop]{\bigcup}{\cdot}}
+
+\title{MA 3831 Principles of Real Analysis 1 }
+\author{Discussion 1}
+
+\setlength\parindent{0pt}
+\begin{document}
+\maketitle
+
+
+\subsection*{Exercise 1}
+Determine the supremum and infimum (if these exist) for each of the following sets. No proofs necessary. Determine if the sets are bounded or not.
+
+\begin{enumerate}[a)]
+\item $A = \{(-1)^n : n = 1,2,3,\dots \}$
+
+\item $B = \big\lbrace n - \frac{2}{3+n^2} : n = 1,2,3,\dots \big\rbrace$
+
+\item $C = \{(-1)^nn : n = 1,2,3,\dots \}$
+
+\item $D = \{\sqrt{n+1} - \sqrt{n} : n = 1,2,3,\dots \}$
+\end{enumerate}
+
+Answer: Following the definitions used in lecture and the course textbook, require supremums and infimums to be real numbers (for example we do not write $\sup C = \infty$ in the case that $C$ was not bounded above) and said that a set is bounded if it is both bounded above and bounded below.
+
+\begin{enumerate}[a)]
+\item $\sup A = 1$, $\inf A = -1$, bounded.
+
+\item No supremum, $\inf B = \frac{1}{2}$, unbounded.
+
+\item No supremum, no infimum, unbounded.
+
+\item $\sup D = \sqrt{2}-1$, $\inf D = 0$, bounded.
+
+\end{enumerate}
+
+\subsection*{Exercise 2}
+True or False: If $a_n$ and $b_n$ are sequences such that $a_n < b_n$ for all $n$, then $\lim_{n\rightarrow\infty} a_n < \lim_{n\rightarrow \infty} b_n$. If this is true, try to write out a quick proof. If this is false, provide a counterexample.\\
+
+Answer: This statement is false in general. Consider the counterexample of $a_n = 1/(2n)$ and $b_n = 1/n$. In this case $a_n < b_n$ for each $n$ yet $\lim_{n\rightarrow\infty} a_n = 0 = \lim_{n\rightarrow \infty} b_n$.
+
+\subsection*{Exercise 3}
+Show that if $A \subset B \subset \mathbb{R}$ and $B$ is bounded above, then $A$ is bounded above. \\
+
+Answer: Since $B$ is bounded above there exists an $M \in \mathbb{R}$ such that $b \leq M$ for all $b \in B$. Let $a \in A$. Since $A \subset B$, $a \in B$ as well. So $a \leq M$. Since $a$ was arbitrary, this means $a \leq M$ for all $a \in A$. Therefore $A$ is bounded above.
+
+\newpage
+
+\subsection*{Exercise 4}
+Show that if $a \leq b$ for each $a \in A$ and each $b \in B$, then $\sup A \leq \inf B$. \\
+
+Answer: First let $a \in A$ be fixed. Since $a \leq b$ for all $b \in B$, $a$ is a lower bound of $B$ and must be less than or equal to the greatest lower bound (infimum) of $B$. That is, $a \leq \inf B$. Since $a$ was taken arbitrarily, this shows that $a \leq \inf B$ for all $a \in A$. In other words, the real number $\inf B$ is an upper bound of the set $A$. So $\inf B$ must be greater than or equal to the least upper bound of $A$. That is, $\sup A \leq \inf B$. 
+
+\subsection*{Exercise 5}
+A maximum element of a set $A$ is an element of $A$ which is greater than or equal to every element of $A$. Show that if $\sup A \in A$, then $\sup A$ is the maximum element of $A$. \\
+
+Answer: By definition of supremum, $a \leq \sup A$ for every element $a \in A$. If $\sup A \in A$ as well then $\sup A$ is an element of $A$ which is greater than or equal to every element of $A$. Therefore $\sup A$ is the maximum element of $A$ whenever $\sup A$ is contained in [is an element of] $A$.
+
+
+\subsection*{Exercise 6}
+
+Use the following lemma to prove that the limit of a convergent sequence is unique. (If there is time, use a proof by contradiction to prove the lemma as well).\\
+
+{\bf Lemma} If $|a| \leq \epsilon$ for all $\epsilon > 0$, then $a = 0$.\\
+
+Proof (lemma): Assume $|a| \leq \epsilon$ for all $\epsilon > 0$ but $a \neq 0$. Then $|a| / 2 > 0$ so we may take $\epsilon = |a| / 2$. By hypothesis we have $0 < |a| \leq |a| / 2$, which is impossible. Since $a \neq 0$ leads to a contradiction, conclude that if $|a| \leq \epsilon$ for all $\epsilon > 0$, it must be the case that $a = 0$. \\
+
+Proof (limit uniqueness): We can also use a proof by contradiction for this statement. Assume $a_n$ is a convergent sequence converging to limits $L$ and $M$ with $L \neq M$ (note: the negation of "the limit is unique" is "there are two or more distinct limits" so we only need to look at two distinct limits). By the definition of a convergent sequence: \\
+
+There exists an $N_1 \in \mathbb{N}$ such that $|a_n - L| < \epsilon /2$ whenever $n \geq N_1$. \\
+
+There exists an $N_2 \in \mathbb{N}$ such that $|a_n - M| < \epsilon /2$ whenever $n \geq N_2$. \\
+
+Put $N \in \mathbb{N}$ such that $N \geq N_1$ and $N \geq N_2$. Then both of the inequalities above hold whenever $n \geq N$. It follows by the triangle inequality that whenever $n \geq N$:
+
+$$
+|L - M| = |L - a_n + a_n - M| \leq |L-a_n| + |a_n - M| = |a_n - L| + |a_n - M| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon \;.
+$$
+
+Since $\epsilon > 0 $ was arbitrary, $|L-M| < \epsilon$ for all $\epsilon > 0$ so $L-M=0 \implies L=M$ (note: $|L-M| < \epsilon \implies |L-M| \leq \epsilon$ as the former condition is stronger). This contradicts the assumption $L \neq M$, so the assumption that $a_n$ could converge to more than one limit is false - the limit of a convergent sequence is unique. 
+
+
+\end{document}

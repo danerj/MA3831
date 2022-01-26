@@ -1,0 +1,84 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{fullpage}
+\usepackage[shortlabels]{enumitem}
+
+
+\makeatletter
+\def\moverlay{\mathpalette\mov@rlay}
+\def\mov@rlay#1#2{\leavevmode\vtop{%
+   \baselineskip\z@skip \lineskiplimit-\maxdimen
+   \ialign{\hfil$\m@th#1##$\hfil\cr#2\crcr}}}
+\newcommand{\charfusion}[3][\mathord]{
+    #1{\ifx#1\mathop\vphantom{#2}\fi
+        \mathpalette\mov@rlay{#2\cr#3}
+      }
+    \ifx#1\mathop\expandafter\displaylimits\fi}
+\makeatother
+
+\newcommand{\cupdot}{\charfusion[\mathbin]{\cup}{\cdot}}
+\newcommand{\bigcupdot}{\charfusion[\mathop]{\bigcup}{\cdot}}
+
+\title{MA 3831 Principles of Real Analysis 1 }
+\author{Discussion 2}
+
+\setlength\parindent{0pt}
+\begin{document}
+\maketitle
+
+
+\subsection*{Exercise 1}
+
+Show that the sequence converges using the definition of a convergent sequence.
+
+\begin{enumerate}[a)]
+\item $a_n = 3-\frac{4}{n}$
+
+\item $b_n = \frac{2n+3}{3n+2}$
+\end{enumerate} 
+
+Answer:
+
+\begin{enumerate}[a)]
+\item It appears that $a_n$ converges to the limit $L = 3$. To prove this using the definition show that:\\
+
+For any $\epsilon > 0$, there is an $N \in \mathbb{N}$ such that for any $n \in \mathbb{N}$ with $n > N$, $|a_n - 3| < \epsilon$. \\
+
+Let $\epsilon > 0$. Choose $N$ to be an integer larger than $4/\epsilon$. For any integer $n > N$ it follows that $4/n < \epsilon$ so that
+
+$$
+|a_n - 3| = \biggr\lvert \left(3-\frac{4}{n}\right) - 3\biggr\rvert = \frac{4}{n} < \epsilon \;.
+$$
+
+Conclude that the sequence $a_n$ converges to 3.
+
+\item Let $\epsilon > 0$. Choose $N \in \mathbb{N}$ such that $N > \frac{5}{9\epsilon}$. For any $n > N$, $\frac{5}{9n} < \epsilon$ so that
+
+$$
+\biggr\lvert b_n - \frac{2}{3} \biggr\lvert
+= \biggr\lvert \frac{2n+3}{3n+2} - \frac{2}{3} \biggr\lvert
+= \biggr\lvert \frac{5}{9n+6} \biggr\lvert
+= \frac{5}{9n+6} 
+< \frac{5}{9n}
+< \epsilon .
+$$
+\end{enumerate}
+
+\section*{Exercise 2}
+
+Let $A = \{1-\frac{1}{n} : n \in \mathbb{N} \}$. Show using the definition of supremum that $\sup A = 1$. \\
+
+Answer: Since $1/2 \in A$, $A \neq \emptyset$. Since $1-1/n < 1$ for any positive integer, $a \leq 1$ for all $a \in A$. Therefore $A$ is a nonempty set of real numbers bounded above. Thus $\sup A$ exists. To prove that $\sup A = 1$, show that:
+
+\begin{enumerate}[(i)]
+\item 1 is an upper bound of $A$
+\item If $M \in \mathbb{R}$ is any upper bound of $A$ then $1 \leq M$.
+\end{enumerate}
+
+We have already established item (i). Note that item (ii) is equivalent (use the contrapositive) to the statement "Any real number strictly less than 1 is not an upper bound". Using more symbolic notation: $\forall \epsilon >0 $, $\exists$ $a \in A$ such that $1-\epsilon < a$ (if you show that such an $a$ exists you have shown that $1-\epsilon$ is not an upper bound of $A$). By the Archimedean property there is an integer $n_\epsilon > 1/\epsilon$. This implies $1-\epsilon < 1-1/n_\epsilon$. Since $1-1/n_\epsilon \in A$, $1-\epsilon$ is not an upper bound of $A$. Conclude $\sup A = 1$. 
+
+
+\end{document}

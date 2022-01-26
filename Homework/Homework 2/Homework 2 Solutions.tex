@@ -1,0 +1,136 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{fullpage}
+\usepackage[shortlabels]{enumitem}
+
+
+\makeatletter
+\def\moverlay{\mathpalette\mov@rlay}
+\def\mov@rlay#1#2{\leavevmode\vtop{%
+   \baselineskip\z@skip \lineskiplimit-\maxdimen
+   \ialign{\hfil$\m@th#1##$\hfil\cr#2\crcr}}}
+\newcommand{\charfusion}[3][\mathord]{
+    #1{\ifx#1\mathop\vphantom{#2}\fi
+        \mathpalette\mov@rlay{#2\cr#3}
+      }
+    \ifx#1\mathop\expandafter\displaylimits\fi}
+\makeatother
+
+\newcommand{\cupdot}{\charfusion[\mathbin]{\cup}{\cdot}}
+\newcommand{\bigcupdot}{\charfusion[\mathop]{\bigcup}{\cdot}}
+
+\title{MA 3831 Principles of Real Analysis 1: Homework 2}
+\author{Hubert J. Farnsworth}
+
+\setlength\parindent{0pt}
+\begin{document}
+\maketitle
+
+
+\subsection*{Exercise 1}
+
+Let $a_n$ be a sequence which converges to a positive number $A$. We showed in class that there
+is an $N \in \mathbb{N}$ such that for all $n \in \mathbb{N}$ with $n > N$, $|a_n| > \frac{A}{2}$. From there, show that $\frac{1}{a_n}$ converges to $\frac{1}{A}$.  \\
+
+Answer: There is an $N \in \mathbb{N}$ such that $\forall n > N$, $0< A/2 < |a_n| \iff 0< 1/|a_n| < 2/A$. Then for all $n > N$,
+
+$$
+\biggr\vert \frac{1}{a_n} - \frac{1}{A} \biggr\rvert
+= \frac{|A-a_n|}{|a_n|A} < \frac{2}{A}|a_n - A| \;.
+$$
+
+Since $|a_n - A| \rightarrow 0$, $\frac{2}{A}|a_n - A| \rightarrow 0$. 
+
+\subsection*{Exercise 2}
+
+Optional and omitted from the solutions. 
+
+\subsection*{Exercise 3}
+
+Prove or disprove: \\
+Let $a_n$ be a sequence of real numbers. If $\lim_{n \rightarrow \infty} (a_{n+1} - a_n) = 0$, then $a_n$ is convergent. \\
+
+Answer: This statement is generally false. Consider the counterexample $a_n = \ln n$.
+$$
+\lim_{n\rightarrow \infty} (a_{n+1} - a_n) = \lim_{n\rightarrow \infty} (\ln (n+1) - \ln n)
+= \lim_{n\rightarrow \infty}\ln \frac{n+1}{n} = \ln 1 = 0$$
+$$
+\lim_{n\rightarrow \infty} a_n = \lim_{n\rightarrow \infty} \ln n = +\infty \text{ (divergent)}
+$$
+
+\subsection*{Exercise 4}
+
+Let $q$ be a fixed positive number. Show that the sequence $a_n = \frac{q^n}{n!}$ is eventually decreasing. \\
+
+Answer: Let $N \in \mathbb{N}$ with $N \geq q-1$. For any $n > N$ we have $n \geq q-1$ as well.
+$$
+q-1 \leq n \iff q \leq n+1 \iff \frac{q^{n+1}}{q^n}\leq \frac{(n+1)!}{n!} \iff a_{n+1} \equiv \frac{q^{n+1}}{(n+1)!} \leq \frac{q^n}{n!} \equiv a_n
+$$
+
+This shows that for $n > N$, $a_{n+1} \leq a_n$. Conclude that $a_n$ is eventually decreasing. 
+
+\newpage
+
+\subsection*{Exercise 5}
+
+(2.6.B of Davidson and Donsig) Let $a_1 = 0$ and $a_{n+1} = \sqrt{5+2a_n}$ for $n\geq 1$. Show that $\lim_{n\rightarrow \infty} a_n$ exists and find the limit. \\
+
+Answer: Prove by induction that $0 \leq a_n \leq a_{n+1} \leq 1+\sqrt{6}$ by induction. \\
+
+Base Case ($n=1$): $a_1 = 0$, $a_2 = \sqrt{5+2a_1} = \sqrt{5} \leq \sqrt{6} \leq 1+\sqrt{6}$. Therefore $0\leq a_1 \leq a_2 \leq 1+\sqrt{6}$. \\
+
+Assume that $0\leq a_n \leq a_{n+1} \leq 1+\sqrt{6}$ for some $n \geq 1$.
+
+\begin{align*}
+a_{n+1} &= \sqrt{5+2a_n} \geq \sqrt{5+2\cdot 0} \geq 0 \\
+a_{n+2} &= \sqrt{5+2a_{n+1}} \geq \sqrt{5+2a_n} = a_{n+1} \\
+a_{n+2} &= \sqrt{5+2a_{n+1}} \leq \sqrt{5+2(1+\sqrt{6})} = \sqrt{7+2\sqrt{6}} \leq 1+\sqrt{6}
+\end{align*}
+
+To prove the last inequality $\sqrt{7+2\sqrt{6}} \leq 1+\sqrt{6}$ consider (note $\sqrt{7+2\sqrt{6}} > 0$ and  $\leq 1+\sqrt{6} > 0$):
+
+$$
+\sqrt{7+2\sqrt{6}} \leq 1+\sqrt{6} \iff \left(\sqrt{7+2\sqrt{6}}\right)^2 \leq (1+\sqrt{6})^2 \iff 7+2\sqrt{6} \leq 1 + 2\sqrt{6} + 6 \iff 7 + 2\sqrt{6} \leq 7 + 2\sqrt{6} \;.
+$$
+
+Therefore $0 \leq a_{n+1} \leq a_{n+2} \leq 1+\sqrt{6}$. This concludes the induction proof.
+
+We have established that the sequence $a_n$ is increasing and bounded above. Thus $a_n$ must converge to some limit $L$ and so must the subsequence $a_{n+1}$ also converge to $L$.
+
+$$L = \lim a_{n+1} = \lim \sqrt{5+2a_n} = \sqrt{5+2\lim a_n} = \sqrt{5+2L}$$
+$$
+L^2 = 5+2L \implies L = 1+\sqrt{6} \text { or } L = 1-\sqrt{6}.
+$$
+
+Since $1-\sqrt{6} < 0$ and $a_n \geq 0$ for all $n$, the only possibility is $L = 1+\sqrt{6}$. 
+
+\subsection*{Exercise 6}
+
+(2.7.A of Davidson and Donsig) Show that $(a_n) = \left(\frac{n \cos^n n}{\sqrt{n^2+2n}}\right)_{n=1}^\infty$ has a convergent subsequence. \\
+
+{\bf Bolzano-Weierstrass Theorem} Every bounded sequence of real numbers has a convergent subsequence. \\
+
+Answer: The sequence $a_n$ is bounded ($|a_n| \leq 1$ $\forall n$). By Bolzano-Weierstrass Theorem there is a subsequence of $a_n$ which converges
+
+$$
+|a_n| = \frac{|n \cos^n n|}{|\sqrt{n^2+2n}|} = \frac{n|\cos n|^n}{\sqrt{n^2+2n}} \leq \frac{n \cdot 1^n}{\sqrt{n^2+2n}} \leq \frac{n}{\sqrt{n^2}} = \frac{n}{|n|} = \frac{n}{n} = 1\;.
+$$
+
+\subsection*{Exercise 7}
+
+(2.7.G of Davidson and Donsig) Let $(x_n)_{n=1}^\infty$ be a sequence in $\mathbb{R}$. Suppose there is a number $L$ such that $L = \lim_{n\rightarrow \infty} x_{3n-1} = \lim_{n\rightarrow \infty} x_{3n} = \lim_{n\rightarrow \infty} x_{3n+1}$. Show that $\lim_{n\rightarrow \infty} x_{3n-1}$ exists and equals $L$. \\
+
+Answer:
+
+There is an $N_1$ such that $|x_{3n-1} - L| < \epsilon$ whenever $3n-1 > N_1$. \\
+
+There is an $N_2$ such that $|x_{3n} - L| < \epsilon$ whenever $3n > N_2$. \\
+
+There is an $N_3$ such that $|x_{3n+1} - L| < \epsilon$ whenever $3n+1 > N_3$. \\
+
+For any integer $m$ there must exist an $n$ such that exactly one of $m = 3n_1, m = 3n$, or $m = 3n+1$ holds. For any $n > N:= \max \{N_1, N_2, N_3\}$, $|x_m - L| < \epsilon$. Conclude that $x_m$ converges and $\lim_{m\rightarrow \infty} x_m = L$. 
+
+\end{document}
